@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import {GlobeDemo} from "./GridGlobe";
-import Lottie from "react-lottie";
+import ClientLottie from "./ClientLottie";
 import { useState } from "react";
 import animationData from '@/data/confetti.json';
 import MagicButton from "./MagicButton";
@@ -49,8 +49,10 @@ export const BentoGridItem = ({
 }) => {
   const [copied, setCopied] = useState(false);
   const handleCopy = () =>{
-    navigator.clipboard.writeText('khangaienkhbat_2026@depauw.edu');
-    setCopied(true);
+    if (typeof navigator !== 'undefined') {
+      navigator.clipboard.writeText('khangaienkhbat_2026@depauw.edu');
+      setCopied(true);
+    }
   }
   return (
     <div
@@ -142,7 +144,7 @@ export const BentoGridItem = ({
             {id === 6 && (
               <div className="mt-1 relative">
                 <div className={`absolute -bottom-5 right-0`}>
-                  <Lottie options={{
+                  <ClientLottie options={{
                     loop: copied,
                     autoplay: copied,
                     animationData,
